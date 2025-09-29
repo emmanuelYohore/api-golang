@@ -12,8 +12,8 @@ func Routes() {
 	database.Connect()
 
 	router.GET("/api/books", controllers.GetBooks)
-	router.GET("/api/books/:id", controllers.GetBook)
-	router.POST("/api/books", controllers.CreateBook)
+	router.GET("/api/book/:id", controllers.GetBook)
+	router.POST("/api/book", controllers.CreateBook)
 	router.PUT("/api/books/:id", controllers.UpdateBook)
 	router.DELETE("/api/books/:id", controllers.DeleteBook)
 

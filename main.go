@@ -1,12 +1,12 @@
 package main
 
 import (
-	"fmt"
-	"golang.org/x/crypto/bcrypt"
+	"github.com/emmanuelYohore/api-golang/database"
+	"github.com/emmanuelYohore/api-golang/routes"
 )
 
 func main() {
-	password := []byte("test")
-	hashedPassword, _ := bcrypt.GenerateFromPassword(password, bcrypt.DefaultCost)
-	fmt.Println(string(hashedPassword))
+	database.Connect()
+	routes.Routes()
+
 }

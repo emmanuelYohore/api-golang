@@ -21,29 +21,16 @@ func Connect() {
 	}
 
 	host := os.Getenv("DB_HOST")
-	if host == "" {
-		host = "localhost"
-	}
+
 	user := os.Getenv("DB_USER")
-	if user == "" {
-		user = "postgres"
-	}
+
 	password := os.Getenv("DB_PASSWORD")
-	if password == "" {
-		password = "1234"
-	}
+
 	dbname := os.Getenv("DB_NAME")
-	if dbname == "" {
-		dbname = "api-golang"
-	}
+
 	port := os.Getenv("DB_PORT")
-	if port == "" {
-		port = "5432"
-	}
+
 	sslmode := os.Getenv("DB_SSLMODE")
-	if sslmode == "" {
-		sslmode = "disable"
-	}
 
 	dsn := fmt.Sprintf(
 		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",

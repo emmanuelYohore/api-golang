@@ -3,8 +3,10 @@ package database
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/emmanuelYohore/api-golang/models"
+	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -13,7 +15,41 @@ var DB *gorm.DB
 
 func Connect() {
 	var err error
-	dsn := "host=localhost user=postgres password=1234 dbname=api-golang port=5432 sslmode=disable"
+
+	if err = godotenv.Load(); err != nil {
+		fmt.Println("No .env file found, using environment variables or defaults")
+	}
+
+	host := os.Getenv("DB_HOST")
+	if host == "" {
+		host = "localhost"
+	}
+	user := os.Getenv("DB_USER")
+	if user == "" {
+		user = "postgres"
+	}
+	password := os.Getenv("DB_PASSWORD")
+	if password == "" {
+		password = "1234"
+	}
+	dbname := os.Getenv("DB_NAME")
+	if dbname == "" {
+		dbname = "api-golang"
+	}
+	port := os.Getenv("DB_PORT")
+	if port == "" {
+		port = "5432"
+	}
+	sslmode := os.Getenv("DB_SSLMODE")
+	if sslmode == "" {
+		sslmode = "disable"
+	}
+
+	dsn := fmt.Sprintf(
+		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
+		host, user, password, dbname, port, sslmode,
+	)
+
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal("Failed to connect to database:", err)
